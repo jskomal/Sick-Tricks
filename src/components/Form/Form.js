@@ -1,31 +1,48 @@
+import { toHaveDisplayValue } from '@testing-library/jest-dom/dist/matchers'
 import React, { Component } from 'react'
 
 class Form extends Component {
   constructor() {
     super()
-    this.state = { title: '', stance: '', obstacle: '' }
+    this.state = { title: '', stance: 'regular', obstacle: 'Flatground' }
   }
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const newTrick = {
+      name: this.state.title,
+      stance: this.state.stance,
+      obstacle: this.state.obstacle,
+      id: Date.now()
+    }
+    this.props.addTrick(newTrick)
+  }
+
   render() {
     return (
       <form>
-        <input type='text' name='title' placeholder='trick title' />
-        <select name='stance'>
+        <input
+          onChange={this.handleChange}
+          type='text'
+          name='title'
+          placeholder='trick title'
+        />
+        <select onChange={this.handleChange} name='stance'>
           <option value='regular'>regular</option>
           <option value='switch'>switch</option>
         </select>
-        <select name='obstacle'>
+        <select onChange={this.handleChange} name='obstacle'>
           <option value='Flatground'>Flatground</option>
           <option value='Ledge'>Ledge</option>
           <option value='Rail'>Rail</option>
           <option value='Stairs'>Stairs</option>
           <option value='Pool'>Pool</option>
         </select>
-        <button>send it</button>
+        <button onClick={this.handleSubmit}>send it</button>
       </form>
     )
   }
