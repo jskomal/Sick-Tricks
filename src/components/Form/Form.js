@@ -17,6 +17,7 @@ class Form extends Component {
       name: this.state.title,
       stance: this.state.stance,
       obstacle: this.state.obstacle,
+      tutorial: 'www.learn2skate.com',
       id: Date.now()
     }
     this.clearInputs()
