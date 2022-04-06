@@ -25,11 +25,6 @@ describe('Sick Trick tests', () => {
   })
 
   it('should be able to submit a new trick', () => {
-    cy.get('.send-it-button')
-      .click()
-      .get('.trick-view')
-      .contains('Christ Air')
-      .contains('regular')
-      .contains('Ledge')
+    cy.get('.send-it-button').click().get('.trick-view').contains('Christ Air')
   })
 })
