@@ -19,7 +19,12 @@ class Form extends Component {
       obstacle: this.state.obstacle,
       id: Date.now()
     }
+    this.clearInputs()
     this.props.addTrick(newTrick)
+  }
+
+  clearInputs = () => {
+    this.setState({ title: '', stance: 'regular', obstacle: 'Flatground' })
   }
 
   render() {
@@ -30,19 +35,22 @@ class Form extends Component {
           type='text'
           name='title'
           placeholder='trick title'
+          value={this.state.title}
         />
-        <select onChange={this.handleChange} name='stance'>
+        <select onChange={this.handleChange} name='stance' value={this.state.stance}>
           <option value='regular'>regular</option>
           <option value='switch'>switch</option>
         </select>
-        <select onChange={this.handleChange} name='obstacle'>
+        <select onChange={this.handleChange} name='obstacle' value={this.state.obstacle}>
           <option value='Flatground'>Flatground</option>
           <option value='Ledge'>Ledge</option>
           <option value='Rail'>Rail</option>
           <option value='Stairs'>Stairs</option>
           <option value='Pool'>Pool</option>
         </select>
-        <button onClick={this.handleSubmit}>send it</button>
+        <button className='send-it-button' onClick={this.handleSubmit}>
+          send it
+        </button>
       </form>
     )
   }
