@@ -1,6 +1,6 @@
 .trick-card {
   width: 400px;
-  height: 35vh;
+  height: 600px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -10,8 +10,41 @@
   border-top-left-radius: 50%;
   border-top-right-radius: 50%;
   margin: 1rem;
+  background-color: #333;
+  color: white;
+  border-top: 10px solid black;
+  border-left: 10px solid black;
+  border-right: 10px solid black;
 }
 
 .trick-title {
-  margin-top: 11vh;
+  margin-top: 15vh;
+  width: 15ch;
+}
+
+a {
+  text-decoration: none;
+  color: pink;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.trick-button {
+  border: 1px solid #333;
+  background-color: #333;
+  color: white;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.trick-button:hover {
+  border: 1px solid pink;
+}
+
+.detail-pair {
+  width: 200px;
+  display: flex;
+  justify-content: space-around;
 }
