@@ -25,6 +25,10 @@ class App extends Component {
       })
   }
 
+  addTrick = (newTrick) => {
+    this.setState({ tricks: [...this.state.tricks, newTrick] })
+  }
+
   render() {
     let trickCards
 
@@ -46,7 +50,7 @@ class App extends Component {
     return (
       <div className='App'>
         <h1>Sick Trick Wish List</h1>
-        <Form />
+        <Form addTrick={this.addTrick} />
         {this.state.tricks && <section className='trick-view'>{trickCards}</section>}
       </div>
     )
