@@ -9,7 +9,7 @@ class App extends Component {
     this.state = { tricks: null, errorMsg: '' }
   }
 
-  componentDidMount() {
+  fetchTricksGet = () => {
     fetch('http://localhost:3001/api/v1/tricks')
       .then((res) => {
         if (!res.ok) {
@@ -23,6 +23,10 @@ class App extends Component {
           console.log(this.state.tricks)
         })
       })
+  }
+
+  componentDidMount() {
+    this.fetchTricksGet()
   }
 
   addTrick = (newTrick) => {
