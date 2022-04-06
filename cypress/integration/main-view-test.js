@@ -27,4 +27,14 @@ describe('Sick Trick tests', () => {
   it('should be able to submit a new trick', () => {
     cy.get('.send-it-button').click().get('.trick-view').contains('Christ Air')
   })
+
+  it('should be able to delete a trick', () => {
+    cy.get('.trick-view')
+      .contains('heelflip')
+      .get('#deleteheelflip')
+      .click()
+      .get('.trick-view')
+      .contains('heelflip')
+      .should('not.exist')
+  })
 })
