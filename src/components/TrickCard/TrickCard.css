@@ -1,0 +1,17 @@
+.trick-card {
+  width: 400px;
+  height: 35vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  margin: 1rem;
+}
+
+.trick-title {
+  margin-top: 11vh;
+}
