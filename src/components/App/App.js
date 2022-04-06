@@ -6,7 +6,7 @@ import './App.css'
 class App extends Component {
   constructor() {
     super()
-    this.state = { tricks: null, errorMsg: '' }
+    this.state = { tricks: [], errorMsg: '' }
   }
 
   fetchTricksGet = () => {
@@ -19,9 +19,7 @@ class App extends Component {
         }
       })
       .then((data) => {
-        this.setState({ tricks: data }, () => {
-          console.log(this.state.tricks)
-        })
+        this.setState({ tricks: data })
       })
   }
 
@@ -35,12 +33,12 @@ class App extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: {
-        name: newTrick.title,
+      body: JSON.stringify({
         stance: newTrick.stance,
+        name: newTrick.name,
         obstacle: newTrick.obstacle,
         tutorial: newTrick.tutorial
-      }
+      })
     })
       .then((res) => {
         if (!res.ok) {
@@ -53,6 +51,14 @@ class App extends Component {
         this.fetchTricksGet()
       })
   }
+
+  deleteTrick = (id) => {
+    fetch(`http://localhost:3001/api/v1/tricks/${id}`, { method: 'DELETE' }).then(() => {
+      this.fetchTricksGet()
+    })
+  }
+
+  addAttempt = (id) => {}
 
   render() {
     let trickCards
@@ -67,6 +73,7 @@ class App extends Component {
             tutorial={trick.tutorial}
             id={trick.id}
             key={trick.id}
+            deleteTrick={this.deleteTrick}
           />
         )
       })
@@ -75,8 +82,13 @@ class App extends Component {
     return (
       <div className='App'>
         <h1>Sick Trick Wish List</h1>
+        {this.state.errorMsg && <h1>{this.state.errorMsg}</h1>}
         <Form addTrick={this.addTrick} />
-        {this.state.tricks && <section className='trick-view'>{trickCards}</section>}
+        {this.state.tricks[0] ? (
+          <section className='trick-view'>{trickCards}</section>
+        ) : (
+          <h1>No Tricks here --- Add one</h1>
+        )}
       </div>
     )
   }
