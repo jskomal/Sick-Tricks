@@ -11,4 +11,25 @@ describe('Sick Trick tests', () => {
       .get('[name="obstacle"]')
       .should('be.visible')
   })
+
+  it('should be able type in the forms', () => {
+    cy.get('[name="title"]')
+      .type('Christ Air')
+      .should('have.value', 'Christ Air')
+      .get('[name="stance"]')
+      .select('regular')
+      .should('have.value', 'regular')
+      .get('[name="obstacle"]')
+      .select('Ledge')
+      .should('have.value', 'Ledge')
+  })
+
+  it('should be able to submit a new trick', () => {
+    cy.get('.send-it-button')
+      .click()
+      .get('.trick-view')
+      .contains('Christ Air')
+      .contains('regular')
+      .contains('Ledge')
+  })
 })
