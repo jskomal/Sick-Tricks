@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import TrickCard from '../TrickCard/TrickCard'
 import './App.css'
 
 class App extends Component {
@@ -24,9 +25,27 @@ class App extends Component {
   }
 
   render() {
+    let trickCards
+
+    if (this.state.tricks) {
+      trickCards = this.state.tricks.map((trick) => {
+        return (
+          <TrickCard
+            stance={trick.stance}
+            name={trick.name}
+            obstacle={trick.obstacle}
+            tutorial={trick.tutorial}
+            id={trick.id}
+            key={trick.id}
+          />
+        )
+      })
+    }
+
     return (
       <div className='App'>
         <h1>Sick Trick Wish List</h1>
+        {this.state.tricks && <section className='trick-view'>{trickCards}</section>}
       </div>
     )
   }
