@@ -30,7 +30,28 @@ class App extends Component {
   }
 
   addTrick = (newTrick) => {
-    this.setState({ tricks: [...this.state.tricks, newTrick] })
+    fetch('http://localhost:3001/api/v1/tricks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: {
+        name: newTrick.title,
+        stance: newTrick.stance,
+        obstacle: newTrick.obstacle,
+        tutorial: newTrick.tutorial
+      }
+    })
+      .then((res) => {
+        if (!res.ok) {
+          this.setState({ errorMsg: 'Something went wrong please try again later' })
+        } else {
+          return res.json()
+        }
+      })
+      .then(() => {
+        this.fetchTricksGet()
+      })
   }
 
   render() {
